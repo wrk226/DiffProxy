@@ -35,7 +35,7 @@ The code will be released after the paper is accepted.
 @article{wang2025diffproxy,
   title={DiffProxy: Multi-View Human Mesh Recovery via Diffusion-Generated Dense Proxies},
   author={Wang, Renke and Zhang, Zhenyu and Tai, Ying and Yang, Jian},
-  journal={arXiv preprint	arXiv:2601.02267 },
+  journal={arXiv preprint arXiv:2601.02267 },
   year={2025}
 }
 ```
