@@ -28,14 +28,7 @@
 <img src="assets/teaser.png" alt="Teaser" width="100%">
 </div>
 
-## 🚧 Release Checklist
-
-- [x] Inference code
-- [x] Pretrained model weights
-- [ ] Training code
-- [ ] Synthetic training dataset
-
-This release is inference-only. The training pipeline and the 105K-subject synthetic dataset described in the paper are not included at this stage.
+This repository provides the inference release of DiffProxy: the two-stage pipeline, pretrained weights, and a one-command demo.
 
 ## 🔍 Overview
 
@@ -209,23 +202,6 @@ To enable the optional warm start:
 ```
 
 Stage 2 outputs fitted parameters, SMPL-X meshes, projected joints, and per-view renders under `<dataset>/ours_4v/<exp>/`.
-
-## 📋 Scope of This Release
-
-Included:
-
-- Stage-1 proxy-generation inference;
-- Stage-2 SMPL-X fitting;
-- optional SMPLest-X initialization;
-- pretrained inference weights and DiffProxy UV topology templates;
-- GT-free visualization and manifest generation.
-
-Not included:
-
-- proxy-generator or decoder training scripts;
-- synthetic-data rendering and annotation generation;
-- the synthetic training dataset;
-- license-restricted SMPL-X and DPoser-X assets.
 
 ## 📚 Citation
 
