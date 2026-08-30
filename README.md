@@ -31,7 +31,7 @@
 ## 🚧 Release Checklist
 
 - [x] Inference code
-- [ ] Pretrained model weights (upload bundle prepared; public URL pending)
+- [x] Pretrained model weights
 - [ ] Training code
 - [ ] Synthetic training dataset
 
@@ -101,7 +101,7 @@ Please follow the licenses of SMPL-X, DPoser-X, and all other third-party assets
 
 ## 📦 Pretrained Models
 
-<!-- WEIGHTS_URL: replace this comment with the public download URL after uploading the prepared bundle. -->
+Download the pretrained bundle from [Google Drive](https://drive.google.com/file/d/14dc97WrIPgdtTu5UGneSZrw5q219YNny/view?usp=sharing).
 
 The public upload archive extracts directly into the repository root. It uses inference-only names and excludes optimizer, scheduler, callback, loop, and random-state data:
 
@@ -121,7 +121,7 @@ The main checkpoint corresponds to the 30-epoch proxy-generator training reporte
 
 Stable Diffusion 2.1 is an external prerequisite and is not redistributed in the DiffProxy bundle. Obtain and license a compatible SD2.1-base snapshot separately, then place it at `pretrained/sd21_base/` or set `SD_BASE_MODEL` to its local path. The release was validated with `Manojb/stable-diffusion-2-1-base@0094d483a120f3f33dafbd187ea4aa60d10de75c`; its model card declares `openrail++`. Users must review and accept the source model's license before downloading or using it.
 
-The bundled DINOv2 snapshot is pinned to `facebook/dinov2-large@47b73eefe95e8d44ec3623f8890bd894b6ea2d6c` under Apache-2.0. `DINO_BASE_MODEL` may select another compatible local snapshot. The archive includes `licenses/` with the DINOv2 Apache-2.0 text, pinned model card, third-party notices, and the UV-template redistribution notice. The repository MIT license does not replace third-party model licenses.
+The bundled DINOv2 snapshot is pinned to `facebook/dinov2-large@47b73eefe95e8d44ec3623f8890bd894b6ea2d6c` under [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0.txt). `DINO_BASE_MODEL` may select another compatible local snapshot. The repository MIT license does not replace third-party model licenses.
 
 ## 📁 Input Data
 
