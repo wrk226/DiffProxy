@@ -1,0 +1,41 @@
+# DiffProxy release runtime
+# Validated on Linux/WSL with Python 3.10.20, CUDA 12.1.
+# Install this file in a fresh environment; it intentionally excludes
+# interactive visualization and research-only acceleration/debug packages.
+
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+torch==2.5.1+cu121
+torchvision==0.20.1+cu121
+pytorch3d @ https://github.com/MiroPsota/torch_packages_builder/releases/download/pytorch3d-0.7.9%2Bd9839a9/pytorch3d-0.7.9%2Bd9839a9pt2.5.1cu121-cp310-cp310-linux_x86_64.whl
+
+# Direct imports used by demo, Stage-1 inference, and Stage-2 fitting
+numpy==2.2.6
+pillow==12.1.1
+opencv-python==4.13.0.92
+scikit-learn==1.7.2
+scikit-image==0.25.2
+scipy==1.15.3
+pyyaml==6.0.3
+omegaconf==2.3.0
+tqdm==4.67.3
+einops==0.8.2
+safetensors==0.7.0
+imageio==2.37.3
+matplotlib==3.10.8
+trimesh==4.11.5
+packaging==26.0
+psutil==7.2.2
+jaxtyping==0.3.7
+typeguard==4.5.1
+chumpy==0.70
+smplx==0.1.28
+torchgeometry==0.1.2
+ml-collections==1.1.0
+loguru==0.7.3
+
+# Stage-1 MV-Adapter / diffusion runtime
+diffusers==0.37.1
+transformers==5.1.0
+pytorch-lightning==2.6.1
+accelerate==1.13.0

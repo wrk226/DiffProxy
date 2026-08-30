@@ -1,0 +1,87 @@
+name: i2mv
+# 用于记录实验名称/输出目录的 tag
+# 可在 launch.py 中通过 --config 解析
+#----------------------------------------------
+tag: sd21
+exp_root_dir: "outputs"
+seed: 42
+ 
+# ---------------- Inference input metadata ----------------
+# The public entrypoint reads images and cameras directly.
+resume: "pretrained/diffproxy_ep30.ckpt"
+data:
+  background_color: black
+  condition_image_modality: ["image"]
+  num_views: 4
+  num_ref_views: 4
+  height: 256
+  width: 256
+# ---------------- 系统模块 ----------------
+system_cls: mvadapter.systems.mvadapter_image_sd.MVAdapterImageSDSystem
+system:
+  # 由于 rgb/uv/seg 为 3 通道，且我们一次输出两张图 → 6 通道；注意 unet_out/in 均按 4 的倍数设置。
+  unet_out: 4
+  unet_in: 4
+
+
+  # ---------- 预训练模型路径 ----------
+  pretrained_model_name_or_path: "pretrained/sd21_base"
+  pretrained_unet_name_or_path: "pretrained/sd21_base"
+  pretrained_vae_name_or_path: "pretrained/proxy_vae"
+  pretrained_adapter_name_or_path: null
+
+  # ---------- Adapter 初始化参数 ----------
+  init_adapter_kwargs:
+    self_attn_processor: "mvadapter.models.attention_processor.DecoupledMVRowSelfAttnProcessor2_0"
+    cond_in_channels: 3
+    copy_attn_weights: true
+
+    # MV / DenseMV 设置
+    use_mv_attn: false
+    use_ref_attn: true
+    ref_attn_mode: "single"  # 必须添加此参数：multi(所有视角ref) 或 single(当前视角ref)
+
+    use_densemv_attn: false    # 启用 DenseMV
+    densemv_scale: 1.0
+    num_views: 4
+    # SPAD-style epipolar attention (mask + Plucker via PyTorch3D)
+    use_spad_epi: true
+    # 启用第二条件编码器
+    enable_dual_cond: true
+    cond2_in_channels: 3
+
+    zero_init_module_keys: ["to_out_cd", "to_out_spad", "to_out_ref"]
+
+    use_cd_attn: true
+    cd_scale: 1.0
+    spad_epi_scale: 1.0  # 推理时使用的默认值
+    use_random_spad_epi_scale: true
+    num_tasks: 2
+
+    # 运行期控制开关（便于直接用 pipeline 时无需经过 system 注入）
+    
+    sync_noise_across_views: false
+    cd_num_tasks: 2
+
+
+  # ---------- 噪声采样器 ----------
+  shift_noise: true
+  shift_noise_mode: interpolated
+  shift_noise_scale: 8
+
+  # ---------- 特征提取器 ----------
+  feature_extractor: "dinov2"
+  dinov2_model_name: "dinov2_vitl14"
+  # vggt removed
+
+  # ---------- 评估 ----------
+  eval_seed: 226
+  eval_num_inference_steps: 30
+  eval_guidance_scale: 3.0
+  eval_height: ${data.height}
+  eval_width: ${data.width}
+  split_image: false
+
+
+trainer:
+  precision: 32

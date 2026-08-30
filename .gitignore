@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local environments and IDEs
+.venv/
+.idea/
+.vscode/
+
+# Licensed or large external assets
+pretrained/
+data/smplx/
+data/diffproxy_uv_template.obj
+data/diffproxy_hand_uv_template.obj
+dependents/
+outputs/
+cache/
+data/masks32.npy
+
+# Generated results
+demo_outputs/
